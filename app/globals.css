@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'tailwindcss';
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --font-family-poppins: var(--font-poppins);
+  --font-family-inter: var(--font-inter);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: '0';
+    }
+  }
+}
+
+.border {
+  border-color: #e4e5e9;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* PAGINATION */
+
+.pagination {
+  font-family: var(
+    --pagination-font-family,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    'Noto Sans',
+    'Liberation Sans',
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji'
+  );
+  font-weight: var(--pagination-font-weight, 400);
+  line-height: var(--pagination-line-height, 1.5);
+  display: flex;
+  padding-left: 0;
+  margin-top: var(--pagination-margin-top, 0);
+  margin-bottom: var(--pagination-margin-bottom, 0);
+  list-style: none;
+  justify-content: var(
+    --pagination-justify-content,
+    var(--pagination-justify-content-fb)
+  );
+}
+
+.pagination .page-link {
+  position: relative;
+  display: block;
+  padding: var(--pagination-padding-y, 0.3rem)
+    var(--pagination-padding-x, 0.65rem);
+  font-size: var(--pagination-font-size, 0.7rem);
+  color: var(--pagination-color, #636363);
+  text-decoration: none;
+  background-color: var(--pagination-bg, #fff);
+  border: var(--pagination-border-width, 1px) solid
+    var(--pagination-border-color, #dee2e6);
+  border-radius: var(--pagination-border-radius, 0.375rem);
+  margin: 0 var(--pagination-item-margin-x, 0.2rem);
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+/* 
+[vaul-drawer][vaul-drawer-direction=right]::after {
+  left: 100%;
+  right: initial;
+  left:0;
+  top: 0;
+  bottom: 0;
+  width: 200%;
+} */
+
+@media (min-width: 1024px) {
+  .pagination .page-link {
+    padding: var(--pagination-padding-y, 0.37rem)
+      var(--pagination-padding-x, 0.7rem);
+    font-size: var(--pagination-font-size, 0.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagination .page-link {
+    transition: none;
+  }
+}
+.pagination .page-link:hover {
+  z-index: 2;
+  color: var(--pagination-hover-color, #6a6a6a);
+  background-color: var(--pagination-hover-bg, #e9ecef);
+  border-color: var(
+    --pagination-hover-border-color,
+    var(--pagination-border-color, #dee2e6)
+  );
+}
+.pagination .page-link:focus {
+  z-index: 3;
+}
+.pagination .active > .page-link {
+  z-index: 3;
+  color: var(--pagination-active-color, var(--pagination-bg, #fff));
+  background-color: var(
+    --pagination-active-bg,
+    var(--pagination-color, #2f2f2f)
+  );
+  border-color: var(
+    --pagination-active-border-color,
+    var(--pagination-active-bg, var(--pagination-color, #2f2f2f))
+  );
+}
+.pagination .disabled > .page-link {
+  color: var(--pagination-disabled-color, #6c757d);
+  pointer-events: none;
+  background-color: var(--pagination-disabled-bg, var(--pagination-bg, #fff));
+  border-color: var(
+    --pagination-disabled-border-color,
+    var(--pagination-border-color, #dee2e6)
+  );
+}
+
+.pagination.justify-content-start {
+  --pagination-justify-content-fb: flex-start;
+}
+
+.pagination.justify-content-end {
+  --pagination-justify-content-fb: flex-end;
+}
+
+.pagination.justify-content-center {
+  --pagination-justify-content-fb: center;
+}
+
+
+.debug-red {
+  border: 1px solid red !important;
+}
+
+.debug-green {
+  border: 1px solid green !important;
+}

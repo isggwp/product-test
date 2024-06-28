@@ -1,0 +1,7 @@
+{
+  "extends": ["next", "prettier"],
+  "rules": {
+    "unused-imports/no-unused-imports": "error",
+    "prettier/prettier": "error",
+  }
+}
