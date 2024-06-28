@@ -47,9 +47,13 @@ export default function Home() {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    router.push({
-      query: { ...query, page, skip: (page - 1) * 5 },
-    })
+    router.push(
+      {
+        query: { ...query, page, skip: (page - 1) * 5 },
+      },
+      undefined,
+      { shallow: true },
+    )
   }
 
   if (isLoading) return <SkelHomepage />
@@ -61,19 +65,21 @@ export default function Home() {
         <main className="h-auto w-full max-w-[1200px] border-[1px] border-slate-100 px-2 lg:h-screen lg:px-4">
           <div className="flex h-full w-full flex-row lg:gap-2">
             <section className="flex w-full flex-col pb-40 lg:w-full lg:pb-0">
-              <section className="flex flex-col items-center justify-between lg:flex-row">
+              <section className="flex flex-col items-center justify-between py-4 lg:flex-row lg:py-0">
                 <h1 className="py-4 font-sans text-xl font-medium text-gray-900 sm:text-xl">
                   Product List
                 </h1>
 
-                <div className="flex-col space-x-3 lg:flex lg:flex-row">
+                <div className="w-full flex-col lg:flex lg:w-auto lg:flex-row  lg:justify-end lg:space-x-3">
                   <Select
                     onValueChange={(e) =>
                       router.push({ query: { ...query, catagories: e } })
                     }
                   >
                     <SelectTrigger className="w-full lg:w-[180px]">
-                      <SelectValue placeholder="Select Catagories" />
+                      <SelectValue
+                        placeholder={query?.catagories ?? 'Select Catagories'}
+                      ></SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -92,7 +98,7 @@ export default function Home() {
                     }
                   >
                     <SelectTrigger className="w-full lg:w-[180px]">
-                      <SelectValue placeholder="Sort By" />
+                      <SelectValue placeholder={query?.sort ?? 'Select Sort'} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
