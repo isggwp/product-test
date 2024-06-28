@@ -16,7 +16,6 @@ import {
 } from '@/components/common/icon'
 
 import { StoredBooks } from '@/types/books'
-import { RootState } from '@/lib/redux/store'
 import Link from 'next/link'
 
 interface CardBookProps {

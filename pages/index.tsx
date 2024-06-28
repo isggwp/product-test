@@ -122,6 +122,7 @@ export default function Home() {
               {/* pagination */}
               <div className="flex w-full justify-center lg:justify-end">
                 <ResponsivePagination
+                  maxWidth={500}
                   current={currentPage}
                   total={Math.ceil(producsData?.total / 5)}
                   onPageChange={handlePageChange}

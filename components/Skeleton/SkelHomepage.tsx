@@ -37,7 +37,7 @@ export default function SkelHomepage() {
               ))}
             </section>
             <div className="mt-5 flex w-full justify-center lg:justify-end">
-              <Skeleton className="h-7 w-8/12 bg-slate-200" />
+              <Skeleton className="h-7 w-8/12 max-w-[450px] bg-slate-200" />
             </div>
           </section>
         </div>

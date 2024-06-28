@@ -39,6 +39,7 @@
     "contentlayer": "^0.3.4",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
+    "embla-carousel-react": "^8.1.5",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",
