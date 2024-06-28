@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import ResponsivePagination from 'react-responsive-pagination'
 import { useQuery } from '@tanstack/react-query'
 import { fetchProducts, fetchProductsCatagories } from '@/lib/fetcher'
 import CardBook from '@/components/common/CardBook'
-
 import SkelHomepage from '@/components/Skeleton/SkelHomepage'
 import { useRouter } from 'next/router'
 
@@ -12,15 +11,21 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
 
 export default function Home() {
   const router = useRouter()
-
   const { query, isReady } = router
+
+  const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    if (query.page) {
+      setCurrentPage(Number(query.page))
+    }
+  }, [query.page])
 
   const {
     data: producsData,
@@ -41,11 +46,13 @@ export default function Home() {
   })
 
   const handlePageChange = (page: number) => {
-    router.push({ query: { ...query, skip: page } })
+    setCurrentPage(page)
+    router.push({
+      query: { ...query, page, skip: (page - 1) * 5 },
+    })
   }
 
   if (isLoading) return <SkelHomepage />
-
   if (error) return <div>Error: {error.message}</div>
 
   if (isReady) {
@@ -55,7 +62,7 @@ export default function Home() {
           <div className="flex h-full w-full flex-row lg:gap-2">
             <section className="flex w-full flex-col pb-40 lg:w-full lg:pb-0">
               <section className="flex flex-col items-center justify-between lg:flex-row">
-                <h1 className="py-4 font-sans text-xl font-medium text-gray-900  sm:text-xl">
+                <h1 className="py-4 font-sans text-xl font-medium text-gray-900 sm:text-xl">
                   Product List
                 </h1>
 
@@ -100,16 +107,16 @@ export default function Home() {
                   </Select>
                 </div>
               </section>
-              <section className="justify-items-between grid-rows-auto grid w-full grid-cols-2 justify-between gap-5 overflow-y-scroll  pb-10 sm:grid-cols-3 lg:grid-cols-5 lg:grid-rows-1">
+              <section className="justify-items-between grid-rows-auto grid w-full grid-cols-2 justify-between gap-5 overflow-y-scroll pb-10 sm:grid-cols-3 lg:grid-cols-5 lg:grid-rows-1">
                 {producsData?.products?.map((item: any) => (
-                  <CardBook data={item} />
+                  <CardBook key={item.id} data={item} />
                 ))}
               </section>
 
-              {/* pagination  */}
+              {/* pagination */}
               <div className="flex w-full justify-center lg:justify-end">
                 <ResponsivePagination
-                  current={Number(query.skip)}
+                  current={currentPage}
                   total={Math.ceil(producsData?.total / 5)}
                   onPageChange={handlePageChange}
                 />
